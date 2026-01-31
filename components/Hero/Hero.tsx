@@ -42,12 +42,6 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        {/*
-          ──────────────────────────────────────────────
-          MOBILE  → stacked (globe on top, text below)
-          lg+     → side-by-side (text left, globe right)
-          ──────────────────────────────────────────────
-        */}
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 lg:gap-12 items-center">
 
           {/* ─── LEFT / BOTTOM — Text content ─── */}
@@ -64,7 +58,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="space-y-1"
             >
-              <p className="text-base md:text-lg text-muted-foreground font-medium tracking-wide">
+              <p className="text-base md:text-lg text-muted-foreground font-medium tracking-wide pt-16">
                 Hello, I&apos;m
               </p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gradient leading-tight">
@@ -89,16 +83,19 @@ export default function Hero() {
             </div>
 
             {/* Bio */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0"
-            >
-              Passionate about crafting user-friendly web applications with modern tools like
-              React, Next.js, and Tailwind CSS. Building scalable solutions across all devices
-              with expertise in both web and mobile development.
-            </motion.p>
+<motion.p
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.35 }}
+  className="text-sm md:text-base lg:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0"
+>
+  <span className=" text-muted">
+    Passionate about crafting user-friendly web and mobile applications
+ 
+  with modern tools like   <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent font-medium"> React, Next.js, Tailwind CSS, and React Native (Expo). </span>
+  Building scalable, cross-platform solutions that deliver exceptional experiences 
+  across all devices with expertise in full-stack development. </span>
+</motion.p>
 
             {/* CTA buttons */}
             <motion.div
@@ -110,14 +107,14 @@ export default function Hero() {
               <a
                 href="#projects"
                 onClick={smoothScroll("projects")}
-                className="px-6 sm:px-8 py-2.5 sm:py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
+                className="px-4 sm:px-6 py-2 bg-primary border border-gray-300 text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
               >
                 View Projects
               </a>
               <a
                 href="#about"
                 onClick={smoothScroll("about")}
-                className="px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 text-sm sm:text-base"
+                className="px-4 sm:px-6 py-2  border-2 border-blue-400 text-primary rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 text-sm sm:text-base"
               >
                 Get in Touch
               </a>

@@ -64,7 +64,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop: 3-column layout using grid */}
-        <div className="hidden md:grid grid-cols-3 items-center h-20">
+        <div className="hidden md:grid grid-cols-3 items-center h-16">
           {/* Left — Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
