@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light Mode - AI Intelligence Theme */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --primary: 217 91% 60%; /* Electric Blue */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 280 65% 60%; /* Neural Purple */
+    --secondary-foreground: 210 40% 98%;
+    --accent: 173 80% 40%; /* Quantum Cyan */
+    --accent-foreground: 210 40% 98%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --border: 214 32% 91%;
+  }
+
+  .dark {
+    /* Dark Mode - Deep AI Theme */
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+    --primary: 217 91% 60%; /* Electric Blue */
+    --primary-foreground: 222 47% 11%;
+    --secondary: 280 65% 60%; /* Neural Purple */
+    --secondary-foreground: 210 40% 98%;
+    --accent: 173 80% 50%; /* Quantum Cyan */
+    --accent-foreground: 222 47% 11%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  
+  .glow-text {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5),
+                 0 0 20px hsl(var(--primary) / 0.3),
+                 0 0 30px hsl(var(--primary) / 0.1);
+  }
+
+  .card-glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.1),
+                0 0 40px hsl(var(--primary) / 0.05);
+  }
+
+  .card-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.2),
+                0 0 60px hsl(var(--primary) / 0.1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary));
 }
