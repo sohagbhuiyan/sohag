@@ -1,36 +1,200 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sohag Bhuiyan — Portfolio
 
-## Getting Started
+A modern, AI-themed portfolio built with **Next.js 16**, **TypeScript**, **Tailwind CSS v4**, **Three.js** (3D Earth), and **Framer Motion** (animations).
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🌍 **3D Rotating Earth** — Three.js sphere with particle cloud & orbit ring
+- 🎭 **Framer Motion Animations** — Every section has scroll-triggered, staggered reveals
+- 🌑 **Dark / Light Mode** — AI-inspired color palette, persisted in localStorage
+- 📱 **Fully Responsive** — Mobile hamburger menu, adaptive layouts
+- 📧 **Contact Form** — React Hook Form + Web3Forms API → emails land in your inbox
+- 📄 **CV Download** — One-click PDF download from the navbar
+- ⚡ **Fast** — Next.js App Router, lazy-loaded 3D canvas, optimized bundle
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Library |
+|---|---|
+| Framework | Next.js 16 |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS v4 |
+| Animations | Framer Motion 11 |
+| 3D | Three.js + React Three Fiber + Drei |
+| Forms | React Hook Form |
+| Icons | Lucide React |
+
+---
+
+## 📁 Project Structure
+
+```
+sohagportfolio/
+├── app/
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts          ← contact form API (POST)
+│   ├── globals.css               ← CSS variables (dark/light), base styles
+│   ├── layout.tsx                ← root layout, ThemeProvider, metadata
+│   └── page.tsx                  ← home page — mounts every section
+│
+├── components/
+│   ├── ThemeProvider.tsx         ← dark/light context + localStorage
+│   ├── Navbar.tsx                ← sticky nav, mobile drawer, CV download
+│   ├── Hero.tsx                  ← hero section, rotating text, 3D canvas
+│   ├── Earth.tsx                 ← Three.js sphere + particles + glow
+│   ├── SectionHeader.tsx         ← reusable animated heading
+│   ├── Experience.tsx            ← timeline cards
+│   ├── Projects.tsx              ← project cards with links
+│   ├── Skills.tsx                ← skill category cards
+│   ├── About.tsx                 ← education + contact form
+│   └── Footer.tsx                ← social links + quick nav
+│
+├── lib/
+│   └── data.ts                   ← ALL portfolio content (typed)
+│
+├── types/
+│   └── index.ts                  ← TypeScript interfaces
+│
+├── public/
+│   └── cv/
+│       └── Sohag_Bhuiyan_CV.pdf  ← your CV (add this file manually)
+│
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+├── postcss.config.js
+└── .env.local                    ← secret keys (create yourself)
+```
+
+---
+
+## 🚀 Installation & Run
+
+### 1. Prerequisites
+
+Make sure you have **Node.js 18+** installed:
+
+```bash
+node --version
+# v18.x or higher
+```
+
+### 2. Clone / copy the project
+
+```bash
+cd sohagportfolio
+```
+
+### 3. Install all dependencies
+
+```bash
+npm install
+```
+
+This downloads everything in one go:
+
+| Package | What it does |
+|---|---|
+| `next` | Framework |
+| `react` / `react-dom` | UI runtime |
+| `framer-motion` | All page & section animations |
+| `three` | 3D rendering engine |
+| `@react-three/fiber` | React bindings for Three.js |
+| `@react-three/drei` | Three.js helpers |
+| `lucide-react` | Icon set |
+| `react-hook-form` | Contact form validation |
+| `tailwindcss` v4 | Utility-first CSS |
+| `typescript` | Type safety |
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Open in browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📧 Contact Form Setup (Web3Forms — FREE)
 
-To learn more about Next.js, take a look at the following resources:
+The contact form sends emails to `sohagbhuiyan778@gmail.com` via **Web3Forms**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Step 1 — Get a free access key
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Go to **https://web3forms.com**
+2. Sign up (free)
+3. Create a new form
+4. Copy your **Access Key**
 
-## Deploy on Vercel
+### Step 2 — Create `.env.local`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create this file in the **project root** (same level as `package.json`):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+WEB3FORMS_ACCESS_KEY=your_access_key_here
+```
+
+> ⚠️ Never commit `.env.local` to Git. It is already in `.gitignore`.
+
+### Step 3 — Done
+
+The API route `app/api/contact/route.ts` reads that key and forwards your form data to Web3Forms, which emails you.
+
+---
+
+## 🎨 Customization
+
+### Update your info
+
+Edit **`lib/data.ts`** — all experiences, projects, skills, education and hero texts live there. Every piece is typed.
+
+### Add your CV
+
+Place your CV PDF at:
+
+```
+public/cv/Sohag_Bhuiyan_CV.pdf
+```
+
+If you rename it, update the `href` in `components/Navbar.tsx`.
+
+### Change colors
+
+Edit the CSS variables at the top of **`app/globals.css`**:
+
+```css
+:root {                          /* dark mode */
+  --primary: #6366f1;            /* main accent */
+  --accent-cyan: #06b6d4;        /* secondary accent */
+  --accent-purple: #a855f7;      /* tertiary accent */
+}
+
+.light {                         /* light mode */
+  --primary: #4f46e5;
+  --accent-cyan: #0891b2;
+  --accent-purple: #9333ea;
+}
+```
+
+---
+
+## 📦 Available Scripts
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start dev server (localhost:3000) |
+| `npm run build` | Production build |
+| `npm run start` | Run production build |
+| `npm run lint` | Run ESLint |
+
+---
