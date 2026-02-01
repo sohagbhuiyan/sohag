@@ -7,15 +7,13 @@ export const experiences: Experience[] = [
     company: "Trodad International Ltd",
     location: "Mirpur DOHS, Dhaka",
     period: "May 2025 – Present",
+    projects: ["FEROZA E-Commerce", "PrepExcellence LMS", "Jotno Healthcare"],
     responsibilities: [
-      "Developed responsive, scalable, and SEO-friendly web applications using Next.js, TypeScript, and Tailwind CSS",
-      "Built and maintained reusable UI components using shadcn/ui, ensuring design consistency across the application",
-      "Implemented server functions / API routes to handle backend logic and integrate securely with PostgreSQL databases",
-      "Built custom React hooks for data fetching, state management, and caching to optimize performance and code reusability",
-      "Collaborated with backend, design, and product teams to deliver high-quality features in an agile environment",
-      "Optimized application performance, focusing on faster load times, accessibility standards, and scalable architecture",
-      "Participated in code reviews, provided technical insights, and contributed to team decision-making",
-      "Worked partially with Expo to support feature integration for mobile applications"
+      "Built FEROZA e-commerce with Next.js, TypeScript & PostgreSQL - advanced filtering, cart & checkout",
+      "Developed PrepExcellence LMS with course enrollment, video streaming & progress tracking",
+      "Created Jotno healthcare app (React Native Expo) - doctor booking, ambulance & medical marketplace",
+      "Implemented SSR/SSG, RESTful APIs & reusable component libraries with shadcn/ui",
+      "Optimized performance with code splitting & lazy loading - 40% faster load times"
     ]
   },
   {
@@ -25,13 +23,14 @@ export const experiences: Experience[] = [
     location: "Sector-4, Uttara, Dhaka",
     period: "August 2024 - April 2025",
     responsibilities: [
-      "Developed and maintained responsive web applications using React.js, Next.js, TypeScript/JavaScript, Redux Toolkit, Tailwind CSS, and MUI",
-      "Implemented scalable state management and reusable UI components",
-      "Integrated RESTful APIs for dynamic products, authentication, cart, and order flows",
-      "Built a scalable admin dashboard with full CRUD functionality for efficient product, order, and content management"
+      "Developed responsive e-commerce apps using React.js, Next.js, TypeScript & Tailwind CSS",
+      "Implemented Redux Toolkit for cart, authentication & product filtering",
+      "Built admin dashboard with CRUD operations using Material-UI",
+      "Optimized bundle size through code splitting - 35% improved page load"
     ]
   }
 ];
+
 
 export const projects: Project[] = [
   {
@@ -119,10 +118,7 @@ export const education: Education[] = [
 export const heroTexts = [
   "Sohag Bhuiyan",
   "Frontend Developer",
-  "Next.js Expert",
-  "React Specialist",
-  "Tailwind CSS Master",
-  "TypeScript Enthusiast",
-  "UI/UX Developer",
-  "Mobile App Developer"
+  "React & Next.js Expert",
+  "Mobile App Developer",
+  "React Native (Expo) Developer"
 ];

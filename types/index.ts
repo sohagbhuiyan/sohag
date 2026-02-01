@@ -4,6 +4,7 @@ export interface Experience {
   company: string;
   location: string;
   period: string;
+  projects?: string[];
   responsibilities: string[];
 }
 

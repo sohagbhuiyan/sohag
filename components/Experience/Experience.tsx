@@ -1,100 +1,153 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase, MapPin, Calendar, ArrowUpRight, Building2 } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { Briefcase, MapPin, Calendar, Code2, Sparkles, Rocket } from "lucide-react";
 import { experiences } from "@/lib/data";
 
-const containerVariants = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
     },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, x: -30 },
+const itemVariants: any = {
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut",
+      duration: 0.8,
+      ease: [0.6, 0.05, 0.01, 0.9],
     },
   },
 };
 
-const dotVariants = {
-  hidden: { scale: 0 },
-  visible: {
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 260,
-      damping: 20,
-    },
+const floatingAnimation: any = {
+  y: [0, -10, 0],
+  transition: {
+    duration: 3,
+    repeat: Infinity,
+    ease: "easeInOut",
   },
 };
 
 export default function Experience() {
-  return (
-    <section id="experience" className="relative py-20 md:py-28 overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background -z-10" />
-      
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-10 -z-10" />
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
 
-      {/* Gradient Orbs */}
-      <div className="absolute top-20 -left-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-20 -right-40 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -z-10" />
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  return (
+    <section 
+      ref={sectionRef}
+      id="experience" 
+      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background"
+    >
+      {/* Animated Background */}
+      <div className="absolute inset-0 -z-10">
+        {/* Gradient Orbs with Motion */}
+        <motion.div 
+          style={{ y }}
+          className="absolute top-20 -left-40 w-96 h-96 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-3xl"
+        />
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
+          className="absolute bottom-20 -right-40 w-[500px] h-[500px] bg-gradient-to-l from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
+        />
+        
+        {/* Animated Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
+        
+        {/* Floating Particles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/40 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-20 md:mb-24"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="inline-block mb-4"
+            animate={floatingAnimation}
+            className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 border border-primary/20 rounded-full backdrop-blur-sm"
           >
-            <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold border border-primary/20">
-              My Journey
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-semibold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Professional Journey
             </span>
           </motion.div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Work Experience
             </span>
           </h2>
           
-          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Building exceptional digital experiences across various industries and technologies
-          </p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+          >
+            Crafting innovative solutions across e-commerce, education, and healthcare platforms
+          </motion.p>
         </motion.div>
 
-        {/* Timeline Container */}
+        {/* Timeline */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial="visible"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="relative"
         >
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-8 md:left-12 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-primary/50 to-transparent hidden md:block" />
+          {/* Animated Timeline Line */}
+          <div className="absolute left-8 md:left-12 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-primary/40 to-transparent hidden md:block overflow-hidden">
+            <motion.div
+              className="w-full h-full bg-gradient-to-b from-primary via-purple-500 to-pink-500"
+              initial={{ y: "-100%" }}
+              whileInView={{ y: "100%" }}
+              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+              viewport={{ once: false }}
+            />
+          </div>
 
-          <div className="space-y-12 md:space-y-16">
+          <div className="space-y-16 md:space-y-20">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.id}
@@ -103,110 +156,256 @@ export default function Experience() {
               >
                 {/* Animated Timeline Dot */}
                 <motion.div
-                  variants={dotVariants}
-                  className="absolute left-[26px] md:left-[42px] top-8 md:top-10 hidden md:block z-10"
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 200, 
+                    damping: 15,
+                    delay: 0.1 
+                  }}
+                  viewport={{ once: true }}
+                  className="absolute left-[26px] md:left-[42px] top-10 md:top-12 hidden md:block z-20"
                 >
                   <div className="relative">
-                    {/* Outer Pulse Ring */}
-                    <div className="absolute inset-0 w-5 h-5 bg-primary/30 rounded-full animate-ping" />
+                    {/* Outer Glow */}
+                    <motion.div 
+                      className="absolute inset-0 w-6 h-6 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full blur-md"
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [0.5, 0.8, 0.5],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    
+                    {/* Pulse Ring */}
+                    <motion.div 
+                      className="absolute inset-0 w-6 h-6 border-2 border-primary rounded-full"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [1, 0, 1],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                      }}
+                    />
                     
                     {/* Main Dot */}
-                    <div className="relative w-5 h-5 bg-primary rounded-full border-4 border-background shadow-lg shadow-primary/50 group-hover:scale-125 transition-transform duration-300" />
+                    <div className="relative w-6 h-6 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-full border-4 border-background shadow-lg shadow-primary/50 group-hover:scale-110 transition-transform duration-300">
+                      <div className="absolute inset-1 bg-background/20 rounded-full animate-pulse" />
+                    </div>
                   </div>
                 </motion.div>
 
                 {/* Experience Card */}
                 <div className="ml-0 md:ml-24 relative">
                   <motion.div
-                    whileHover={{ y: -4, scale: 1.01 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 md:p-8 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-500 overflow-hidden group"
+                    whileHover={{ 
+                      y: -8, 
+                      scale: 1.01,
+                      rotateY: 2,
+                    }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 20 
+                    }}
+                    className="relative bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-10 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden"
                   >
-                    {/* Card Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Animated Background Gradient */}
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                      animate={{
+                        background: [
+                          "linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 50%, rgba(236, 72, 153, 0.1) 100%)",
+                          "linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(168, 85, 247, 0.1) 100%)",
+                          "linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.05) 50%, rgba(59, 130, 246, 0.1) 100%)",
+                        ],
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
                     
                     {/* Shine Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
+                      animate={{
+                        x: ["-100%", "200%"],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatDelay: 2,
+                        ease: "easeInOut",
+                      }}
+                    />
+
+                    {/* Corner Decorations */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-50" />
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-tr-full opacity-50" />
 
                     <div className="relative z-10">
-                      <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                        {/* Icon & Company */}
-                        <div className="flex-shrink-0">
+                      <div className="flex flex-col lg:flex-row lg:items-start gap-8">
+                        {/* Icon */}
+                        <motion.div 
+                          className="flex-shrink-0"
+                          whileHover={{ rotate: 360, scale: 1.1 }}
+                          transition={{ duration: 0.6 }}
+                        >
                           <div className="relative">
-                            {/* Glow Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-300" />
+                            {/* Glow */}
+                            <motion.div 
+                              className="absolute inset-0 bg-gradient-to-br from-primary via-purple-500 to-pink-500 opacity-30 blur-xl"
+                              animate={{
+                                scale: [1, 1.2, 1],
+                                opacity: [0.3, 0.5, 0.3],
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                              }}
+                            />
                             
                             {/* Icon Container */}
-                            <div className="relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-all duration-300 group-hover:rotate-6">
-                              <Building2 className="text-primary w-8 h-8 md:w-10 md:h-10" strokeWidth={1.5} />
+                            <div className="relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-primary/30 backdrop-blur-sm group-hover:border-primary/50 transition-all duration-300 overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+                              {index === 0 ? (
+                                <Rocket className="relative text-primary w-10 h-10 md:w-12 md:h-12 drop-shadow-lg" strokeWidth={1.5} />
+                              ) : (
+                                <Code2 className="relative text-purple-500 w-10 h-10 md:w-12 md:h-12 drop-shadow-lg" strokeWidth={1.5} />
+                              )}
                             </div>
                           </div>
-                        </div>
+                        </motion.div>
 
                         {/* Content */}
-                        <div className="flex-1 space-y-5">
+                        <div className="flex-1 space-y-6">
                           {/* Header */}
-                          <div className="space-y-3">
-                            <div className="flex items-start justify-between gap-4">
-                              <h3 className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                                {exp.title}
-                              </h3>
-                              
-                              <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
-                            </div>
+                          <div className="space-y-4">
+                            <motion.h3 
+                              className="text-3xl md:text-4xl font-bold   group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-500"
+                              whileHover={{ x: 5 }}
+                            >
+                              {exp.title}
+                            </motion.h3>
 
                             {/* Meta Information */}
-                            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base">
-                              <span className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                            <div className="flex flex-wrap gap-4 text-sm md:text-base">
+                              <motion.span 
+                                className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                <div className="w-9 h-9 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-xl flex items-center justify-center border border-primary/20">
                                   <Briefcase size={16} className="text-primary" />
                                 </div>
-                                <span className="font-medium">{exp.company}</span>
-                              </span>
+                                <span className="font-semibold">{exp.company}</span>
+                              </motion.span>
                               
-                              <span className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                                <div className="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center">
-                                  <MapPin size={16} className="text-secondary" />
+                              <motion.span 
+                                className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                <div className="w-9 h-9 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center border border-purple-500/20">
+                                  <MapPin size={16} className="text-purple-500" />
                                 </div>
                                 <span>{exp.location}</span>
-                              </span>
+                              </motion.span>
                               
-                              <span className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                                  <Calendar size={16} className="text-primary" />
+                              <motion.span 
+                                className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                <div className="w-9 h-9 bg-gradient-to-br from-pink-500/20 to-primary/20 rounded-xl flex items-center justify-center border border-pink-500/20">
+                                  <Calendar size={16} className="text-pink-500" />
                                 </div>
-                                <span className="font-medium">{exp.period}</span>
-                              </span>
+                                <span className="font-semibold">{exp.period}</span>
+                              </motion.span>
                             </div>
                           </div>
 
+                          {/* Projects Badge */}
+                          {exp.projects && exp.projects.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {exp.projects.map((project, idx) => (
+                                <motion.span
+                                  key={idx}
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: idx * 0.1 }}
+                                  whileHover={{ scale: 1.05, y: -2 }}
+                                  className="px-4 py-2 bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 rounded-full text-sm font-medium text-primary hover:border-primary/40 transition-all duration-300"
+                                >
+                                  {project}
+                                </motion.span>
+                              ))}
+                            </div>
+                          )}
+
                           {/* Divider */}
-                          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+                          <div className="relative h-px">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-border to-transparent" />
+                            <motion.div 
+                              className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+                              initial={{ scaleX: 0 }}
+                              whileInView={{ scaleX: 1 }}
+                              transition={{ duration: 0.8, delay: 0.2 }}
+                            />
+                          </div>
 
                           {/* Responsibilities */}
-                          <ul className="space-y-3">
+                          <ul className="space-y-4">
                             {exp.responsibilities.map((resp, idx) => (
                               <motion.li
                                 key={idx}
-                                initial={{ opacity: 0, x: -10 }}
+                                initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.1 }}
+                                transition={{ delay: idx * 0.08, duration: 0.5 }}
                                 viewport={{ once: true }}
+                                whileHover={{ x: 8 }}
                                 className="flex items-start gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
                               >
-                                <span className="flex-shrink-0 w-2 h-2 bg-gradient-to-br from-primary to-secondary rounded-full mt-2 group-hover:scale-125 transition-transform duration-300" />
-                                <span className="leading-relaxed">{resp}</span>
+                                <motion.span 
+                                  className="flex-shrink-0 w-2 h-2 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-full mt-2"
+                                  whileHover={{ scale: 1.5, rotate: 180 }}
+                                  transition={{ duration: 0.3 }}
+                                />
+                                <span className="leading-relaxed text-base">{resp}</span>
                               </motion.li>
                             ))}
                           </ul>
                         </div>
                       </div>
                     </div>
+
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/0 via-purple-500/0 to-pink-500/0 group-hover:from-primary/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 transition-all duration-500 pointer-events-none" />
                   </motion.div>
 
-                  {/* Connection Line to Next Item */}
+                  {/* Connection Line */}
                   {index !== experiences.length - 1 && (
-                    <div className="hidden md:block absolute left-[-52px] top-full h-16 w-0.5 bg-gradient-to-b from-primary/50 to-transparent" />
+                    <motion.div 
+                      className="hidden md:block absolute left-[-52px] top-full h-20 w-[2px] bg-gradient-to-b from-primary/40 to-transparent overflow-hidden"
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                      viewport={{ once: true }}
+                    >
+                      <motion.div
+                        className="w-full h-full bg-gradient-to-b from-primary via-purple-500 to-transparent"
+                        animate={{ y: ["-100%", "100%"] }}
+                        transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+                      />
+                    </motion.div>
                   )}
                 </div>
               </motion.div>
@@ -214,19 +413,37 @@ export default function Experience() {
           </div>
         </motion.div>
 
-        {/* Bottom Decoration */}
+        {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-20 text-center"
         >
-          <div className="inline-flex items-center gap-2 text-muted-foreground">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-border" />
-            <span className="text-sm font-medium">More experiences coming soon</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-border" />
-          </div>
+          <motion.div 
+            className="inline-flex items-center gap-3 text-muted-foreground"
+            animate={{
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <motion.div 
+              className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent"
+              animate={{ scaleX: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <span className="text-sm font-medium">Crafting the future, one project at a time</span>
+            <motion.div 
+              className="h-px w-16 bg-gradient-to-l from-transparent via-primary to-transparent"
+              animate={{ scaleX: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>
