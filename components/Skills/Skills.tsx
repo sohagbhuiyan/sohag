@@ -326,7 +326,7 @@ export default function Skills() {
                 className="inline-flex items-center gap-3 mb-3"
               >
                 <Sparkles className="w-5 h-5 text-primary" />
-                <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                   Continuous Learning & Innovation
                 </span>
                 <Sparkles className="w-5 h-5 text-primary" />

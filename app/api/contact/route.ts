@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, email, message } = body;
 
-    // Validate the input
+    // Validate input
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -22,43 +22,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Here you can integrate with email services like:
-    // - Resend
-    // - SendGrid
-    // - Nodemailer
-    // - EmailJS
+    // Send email using Web3Forms - using FormData format as required
+    const formData = new FormData();
+    formData.append("access_key", process.env.WEB3FORMS_ACCESS_KEY || "");
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("message", message);
+    formData.append("subject", `Portfolio Contact থেকে নতুন message - ${name}`);
+    formData.append("from_name", "Portfolio Contact Form");
     
-    // For now, we'll use a third-party API (Formspree, Web3Forms, or similar)
-    // You can replace this with your preferred email service
-    
-    const formspreeEndpoint = "https://formspree.io/f/YOUR_FORM_ID"; // Replace with your Formspree ID
-    
-    // Alternative: Use Web3Forms (free, no backend needed)
-    const web3FormsEndpoint = "https://api.web3forms.com/submit";
-    
-    const response = await fetch(web3FormsEndpoint, {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Get free key from https://web3forms.com
-        name,
-        email,
-        message,
-        to: "sohagbhuiyan778@gmail.com",
-        subject: `Portfolio Contact from ${name}`,
-      }),
+      body: formData,
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to send email");
-    }
+    const data = await response.json();
 
-    return NextResponse.json(
-      { message: "Email sent successfully" },
-      { status: 200 }
-    );
+    if (data.success) {
+      return NextResponse.json(
+        { message: "Email sent successfully" },
+        { status: 200 }
+      );
+    } else {
+      console.error("Web3Forms Error:", data);
+      return NextResponse.json(
+        { error: data.message || "Failed to send email" },
+        { status: 400 }
+      );
+    }
   } catch (error) {
     console.error("Contact form error:", error);
     return NextResponse.json(

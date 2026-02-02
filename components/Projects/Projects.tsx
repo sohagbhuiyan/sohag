@@ -121,7 +121,7 @@ export default function Projects() {
             className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 border border-primary/20 rounded-full backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Portfolio Showcase
             </span>
           </motion.div>
@@ -264,7 +264,7 @@ export default function Projects() {
                         className="flex items-start gap-3 text-sm text-muted-foreground group/item"
                       >
                         <motion.span 
-                          className="flex-shrink-0 w-5 h-5 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-full flex items-center justify-center mt-0.5"
+                          className="flex-shrink-0 w-5 h-5 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center mt-0.5"
                           whileHover={{ scale: 1.2, rotate: 180 }}
                           transition={{ duration: 0.3 }}
                         >
@@ -282,7 +282,7 @@ export default function Projects() {
                 <div className="relative h-px mb-6">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-border to-transparent" />
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -333,7 +333,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500 text-primary-foreground hover:opacity-90 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg shadow-primary/30 group/btn"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-300 via-purple-500 to-pink-500 text-primary-foreground hover:opacity-90 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg shadow-primary/30 group/btn"
                     >
                       <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                       <span>Live Demo</span>
@@ -343,7 +343,7 @@ export default function Projects() {
               </div>
 
               {/* Bottom Gradient Bar */}
-              <div className="relative h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-50 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+              <div className="relative h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-50 group-hover:opacity-100 transition-opacity duration-500 z-10" />
               
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/0 via-purple-500/0 to-pink-500/0 group-hover:from-primary/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 transition-all duration-500 pointer-events-none" />
@@ -375,7 +375,7 @@ export default function Projects() {
               animate={{ scaleX: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <span className="text-sm font-medium">Want to see more of my work?</span>
+            <span className="text-sm  rounded-full font-medium">Want to see more of my work?</span>
             <motion.div 
               className="h-px w-16 bg-gradient-to-l from-transparent via-primary to-transparent"
               animate={{ scaleX: [0.5, 1, 0.5] }}
@@ -389,7 +389,7 @@ export default function Projects() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary via-purple-500 to-pink-500 text-primary-foreground rounded-full font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-300 via-purple-500 to-pink-500 text-primary-foreground rounded-full font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
           >
             <Github size={20} />
             <span>View All Projects on GitHub</span>

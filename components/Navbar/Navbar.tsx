@@ -46,7 +46,12 @@ export default function Navbar() {
     setIsOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // account for fixed nav height so the section isn't hidden behind the navbar
+      const navEl = document.querySelector("nav");
+      const navHeight = (navEl && navEl.clientHeight) ? navEl.clientHeight : 80;
+      const elementTop = (element as HTMLElement).getBoundingClientRect().top + window.scrollY;
+      const scrollTo = Math.max(elementTop - navHeight - 16, 0); // extra 16px gap
+      window.scrollTo({ top: scrollTo, behavior: "smooth" });
     }
   };
 
@@ -174,7 +179,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              className="p-2 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-300 z-99"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -191,7 +196,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border"
+            className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border fixed top-0 inset-x-0 z-20 overflow-hidden"
           >
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item, index) => (
