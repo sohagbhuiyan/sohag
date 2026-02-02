@@ -3,7 +3,7 @@ import { Experience, Project, Skill, Education } from "@/types";
 export const experiences: Experience[] = [
   {
     id: "exp-1",
-    title: "Frontend Developer",
+    title: "Software Developer",
     company: "Trodad International Ltd",
     location: "Mirpur DOHS, Dhaka",
     period: "May 2025 – Present",
@@ -35,23 +35,9 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
   {
     id: "proj-1",
-    title: "E-Commerce Platform",
-    description: "A full-featured e-commerce platform with separate user and admin panels, and secure role-based authentication",
-    techStack: ["React.js", "Tailwind CSS", "Redux Toolkit", "Spring Boot", "JWT", "MySQL"],
-    features: [
-      "Shop products with advanced filtering",
-      "Build custom PCs/CCs",
-      "Manage cart, wishlist, and compare",
-      "Place orders and track status",
-      "Post reviews & questions",
-      "Admin panel for complete content management"
-    ]
-  },
-  {
-    id: "proj-2",
-    title: "SEO-Optimized E-Commerce (MVP)",
-    description: "A minimal e-commerce platform built with Next.js, TypeScript, and Tailwind CSS",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Redux Toolkit"],
+    title: "FEROZA",
+    description: "An e-commerce platform built with Next.js, TypeScript, Prisma, PostgreSQL and Tailwind CSS",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Tanstack query"],
     github: "github.com/sohagbhuiyan/SEO-Optimized",
     live: "https://seo-optimized-demo.vercel.app",
     features: [
@@ -61,6 +47,22 @@ export const projects: Project[] = [
       "Responsive design"
     ]
   },
+  {
+  id: "proj-2",
+  title: "Jotno  Mobile App (Expo)",
+  description: "A modern cross-platform mobile task management application built with Expo, designed to manage personal and professional tasks efficiently on the go.",
+  techStack: ["Expo", "React Native", "TypeScript"],
+features: [
+  "Book doctor appointments with specialty and availability filters",
+  "Real-time ambulance request with location tracking",
+  "Browse, buy, and sell medical instruments and equipment",
+  "Secure patient profile with appointment history",
+  "In-app notifications for appointment confirmations and updates",
+  "Easy-to-use, mobile-optimized interface",
+  "Cross-platform support for Android and iOS"
+]
+},
+
   {
     id: "proj-3",
     title: "Advanced To-Do Application",

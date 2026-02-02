@@ -106,7 +106,7 @@ export default function Experience() {
             className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 border border-primary/20 rounded-full backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Professional Journey
             </span>
           </motion.div>
