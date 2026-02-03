@@ -184,7 +184,7 @@ export default function Navbar() {
               className="p-2 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-300 z-99"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={24} className="text-black" /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -198,7 +198,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden  backdrop-blur-lg border-b border-border shadow-xl fixed top-0 inset-x-0 z-50 overflow-hidden"
+            className="md:hidden  fixed top-0 inset-x-0 z-50"
           >
             <div className="px-4 py-4 space-y-2 bg-purple-50 dark:bg-blue-800/30 backdrop-blur-lg border-b border-border shadow-xl">
               {navItems.map((item, index) => (
@@ -218,8 +218,8 @@ export default function Navbar() {
                     }}
                     className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                       activeSection === item.href.substring(1)
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30"
+                        ? "bg-primary text-gray-500"
+                        : " text-gray-500 hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30"
                     }`}
                   >
                     {item.name}
@@ -233,7 +233,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.5 }}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium text-sm"
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-blue-700 rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium text-sm"
               >
                 <Download size={18} />
                 <span>Download CV</span>
