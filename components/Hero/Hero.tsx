@@ -128,7 +128,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.65 }}
               className="flex flex-wrap gap-2 justify-center lg:justify-start"
             >
-              {["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux"].map((tech, i) => (
+              {["React.js", "Next.js", "React Native", "Expo", "prisma", "TypeScript", "Tailwind CSS", ].map((tech, i) => (
                 <motion.span
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}

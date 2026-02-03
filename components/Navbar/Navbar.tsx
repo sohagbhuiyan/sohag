@@ -101,7 +101,9 @@ export default function Navbar() {
                 key={item.name}
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
+                whileHover={{ y: -4, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
               >
                 <Link
                   href={item.href}
@@ -109,10 +111,10 @@ export default function Navbar() {
                     e.preventDefault();
                     handleNavClick(item.href);
                   }}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  className={`px-2 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeSection === item.href.substring(1)
                       ? "bg-primary text-primary-foreground"
-                      : "text-foreground hover:bg-muted"
+                      : "text-foreground hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30"
                   }`}
                 >
                   {item.name}
@@ -196,15 +198,17 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border fixed top-0 inset-x-0 z-20 overflow-hidden"
+            className="md:hidden  backdrop-blur-lg border-b border-border shadow-xl fixed top-0 inset-x-0 z-50 overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-2">
+            <div className="px-4 py-4 space-y-2 bg-purple-50 dark:bg-blue-800/30 backdrop-blur-lg border-b border-border shadow-xl">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 * index }}
+                  whileHover={{ x: 6, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Link
                     href={item.href}
@@ -215,7 +219,7 @@ export default function Navbar() {
                     className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                       activeSection === item.href.substring(1)
                         ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-muted"
+                        : "text-foreground hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950/30"
                     }`}
                   >
                     {item.name}
