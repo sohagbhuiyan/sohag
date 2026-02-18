@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,7 +17,7 @@ export default function Footer() {
     {
       name: "LinkedIn",
       icon: Linkedin,
-      href: "https://linkedin.com/in/sohagbhuiyan",
+      href: "https://www.linkedin.com/in/sohag-0bab87176/",
     },
     {
       name: "Email",
@@ -29,19 +31,38 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-2xl font-bold text-gradient mb-4">
-              SB<span className="text-primary">.</span>
-            </h3>
-            <p className="text-muted-foreground">
-              Frontend Developer passionate about creating beautiful and functional web experiences.
-            </p>
-          </motion.div>
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+  className="flex items-center justify-center gap-4 px-2"
+>
+  <Link
+    href="#home"
+    onClick={(e) => {
+      e.preventDefault();
+      document
+        .getElementById("home")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }}
+    className="relative h-20 w-[140px]"   // ✅ logo container size
+  >
+    <Image
+      src="/lg.png"
+      alt="Sohag Bhuiyan Logo"
+      fill
+      priority
+      className="object-contain"          // ✅ logo distort হবে না
+    />
+  </Link>
+
+  <p className="text-muted-foreground max-w-md text-sm sm:text-base">
+    Frontend Developer passionate about creating beautiful and functional web
+    experiences.
+  </p>
+</motion.div>
+
 
           {/* Quick Links */}
           <motion.div
@@ -102,8 +123,7 @@ export default function Footer() {
           className="mt-12 pt-8 border-t border-border text-center text-muted-foreground"
         >
           <p className="flex items-center justify-center gap-2">
-            © {currentYear} Sohag Bhuiyan. Made with{" "}
-            <Heart size={16} className="text-red-500 fill-red-500" /> using Next.js & Tailwind CSS
+            © {currentYear} Sohag Bhuiyan. All rights reserved.
           </p>
         </motion.div>
       </div>

@@ -51,14 +51,14 @@ export default function Experience() {
     <section 
       ref={sectionRef}
       id="experience" 
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background"
+      className="relative py-10 md:py-32 overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Orbs with Motion */}
         <motion.div 
           style={{ y }}
-          className="absolute top-20 -left-40 w-96 h-96 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-3xl"
+          className="absolute top-10 md:top-20 -left-40 w-96 h-96 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-3xl"
         />
         <motion.div 
           style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
@@ -111,7 +111,7 @@ export default function Experience() {
             </span>
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Work Experience
             </span>
@@ -216,7 +216,7 @@ export default function Experience() {
                       stiffness: 300, 
                       damping: 20 
                     }}
-                    className="relative bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 md:p-10 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden"
+                    className="relative bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border border-primary/20 rounded-3xl p-2 md:p-10 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/40 transition-all duration-500 overflow-hidden"
                   >
                     {/* Animated Background Gradient */}
                     <motion.div 
@@ -253,139 +253,143 @@ export default function Experience() {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-50" />
                     <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-tr-full opacity-50" />
 
-                    <div className="relative z-10">
-                      <div className="flex flex-col lg:flex-row lg:items-start gap-8">
-                        {/* Icon */}
-                        <motion.div 
-                          className="flex-shrink-0"
-                          whileHover={{ rotate: 360, scale: 1.1 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <div className="relative">
-                            {/* Glow */}
-                            <motion.div 
-                              className="absolute inset-0 bg-gradient-to-br from-primary via-purple-500 to-pink-500 opacity-30 blur-xl"
-                              animate={{
-                                scale: [1, 1.2, 1],
-                                opacity: [0.3, 0.5, 0.3],
-                              }}
-                              transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                              }}
-                            />
-                            
-                            {/* Icon Container */}
-                            <div className="relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-primary/30 backdrop-blur-sm group-hover:border-primary/50 transition-all duration-300 overflow-hidden">
-                              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
-                              {index === 0 ? (
-                                <Rocket className="relative text-primary w-10 h-10 md:w-12 md:h-12 drop-shadow-lg" strokeWidth={1.5} />
-                              ) : (
-                                <Code2 className="relative text-purple-500 w-10 h-10 md:w-12 md:h-12 drop-shadow-lg" strokeWidth={1.5} />
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
+       <div className="relative z-10">
+  {/* Mobile: icon+title row on top, content below | Desktop: unchanged side-by-side */}
+  <div className="flex flex-col lg:flex-row lg:items-start gap-4 md:gap-8">
+    
+    {/* Mobile: icon + title in one row | Desktop: icon alone in column */}
+    <div className="flex flex-row items-center gap-3 lg:block">
+      {/* Icon */}
+      <motion.div
+        className="flex-shrink-0"
+        whileHover={{ rotate: 360, scale: 1.1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="relative">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-blue-800 via-purple-500 to-pink-500 opacity-30 blur-xl"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="relative w-12 h-12 md:w-24 md:h-24 bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-primary/30 backdrop-blur-sm group-hover:border-primary/50 transition-all duration-300 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+            {index === 0 ? (
+              <Rocket className="relative text-primary w-6 h-6 md:w-12 md:h-12 drop-shadow-lg" strokeWidth={1.5} />
+            ) : (
+              <Code2 className="relative text-purple-500 w-6 h-6 md:w-12 md:h-12 drop-shadow-lg" strokeWidth={1.5} />
+            )}
+          </div>
+        </div>
+      </motion.div>
 
-                        {/* Content */}
-                        <div className="flex-1 space-y-6">
-                          {/* Header */}
-                          <div className="space-y-4">
-                            <motion.h3 
-                              className="text-3xl md:text-4xl font-bold   group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-500"
-                              whileHover={{ x: 5 }}
-                            >
-                              {exp.title}
-                            </motion.h3>
+      {/* Title — shown beside icon on mobile only, hidden on lg (rendered again below in content) */}
+      <motion.h3
+        className="text-xl font-bold lg:hidden group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-500"
+        whileHover={{ x: 5 }}
+      >
+        {exp.title}
+      </motion.h3>
+    </div>
 
-                            {/* Meta Information */}
-                            <div className="flex flex-wrap gap-4 text-sm md:text-base">
-                              <motion.span 
-                                className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                                whileHover={{ scale: 1.05 }}
-                              >
-                                <div className="w-9 h-9 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-xl flex items-center justify-center border border-primary/20">
-                                  <Briefcase size={16} className="text-primary" />
-                                </div>
-                                <span className="font-semibold">{exp.company}</span>
-                              </motion.span>
-                              
-                              <motion.span 
-                                className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                                whileHover={{ scale: 1.05 }}
-                              >
-                                <div className="w-9 h-9 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center border border-purple-500/20">
-                                  <MapPin size={16} className="text-purple-500" />
-                                </div>
-                                <span>{exp.location}</span>
-                              </motion.span>
-                              
-                              <motion.span 
-                                className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                                whileHover={{ scale: 1.05 }}
-                              >
-                                <div className="w-9 h-9 bg-gradient-to-br from-pink-500/20 to-primary/20 rounded-xl flex items-center justify-center border border-pink-500/20">
-                                  <Calendar size={16} className="text-pink-500" />
-                                </div>
-                                <span className="font-semibold">{exp.period}</span>
-                              </motion.span>
-                            </div>
-                          </div>
+    {/* Content */}
+    <div className="flex-1 space-y-6">
+      {/* Header */}
+      <div className="space-y-4">
+        {/* Title — hidden on mobile (shown above), visible on desktop */}
+        <motion.h3
+          className="hidden lg:block text-4xl font-bold group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-500"
+          whileHover={{ x: 5 }}
+        >
+          {exp.title}
+        </motion.h3>
 
-                          {/* Projects Badge */}
-                          {exp.projects && exp.projects.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
-                              {exp.projects.map((project, idx) => (
-                                <motion.span
-                                  key={idx}
-                                  initial={{ opacity: 0, scale: 0.8 }}
-                                  whileInView={{ opacity: 1, scale: 1 }}
-                                  transition={{ delay: idx * 0.1 }}
-                                  whileHover={{ scale: 1.05, y: -2 }}
-                                  className="px-4 py-2 bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 rounded-full text-sm font-medium text-primary hover:border-primary/40 transition-all duration-300"
-                                >
-                                  {project}
-                                </motion.span>
-                              ))}
-                            </div>
-                          )}
+        {/* Meta Information */}
+        <div className="flex flex-wrap gap-3 text-sm md:text-base">
+          <motion.span
+            className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-xl flex items-center justify-center border border-primary/20">
+              <Briefcase size={14} className="text-primary" />
+            </div>
+            <span className="font-semibold">{exp.company}</span>
+          </motion.span>
 
-                          {/* Divider */}
-                          <div className="relative h-px">
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-border to-transparent" />
-                            <motion.div 
-                              className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
-                              initial={{ scaleX: 0 }}
-                              whileInView={{ scaleX: 1 }}
-                              transition={{ duration: 0.8, delay: 0.2 }}
-                            />
-                          </div>
+          <motion.span
+            className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center border border-purple-500/20">
+              <MapPin size={14} className="text-purple-500" />
+            </div>
+            <span>{exp.location}</span>
+          </motion.span>
 
-                          {/* Responsibilities */}
-                          <ul className="space-y-4">
-                            {exp.responsibilities.map((resp, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.08, duration: 0.5 }}
-                                viewport={{ once: true }}
-                                whileHover={{ x: 8 }}
-                                className="flex items-start gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                              >
-                                <motion.span 
-                                  className="flex-shrink-0 w-2 h-2 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-full mt-2"
-                                  whileHover={{ scale: 1.5, rotate: 180 }}
-                                  transition={{ duration: 0.3 }}
-                                />
-                                <span className="leading-relaxed text-base">{resp}</span>
-                              </motion.li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+          <motion.span
+            className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-pink-500/20 to-primary/20 rounded-xl flex items-center justify-center border border-pink-500/20">
+              <Calendar size={14} className="text-pink-500" />
+            </div>
+            <span className="font-semibold">{exp.period}</span>
+          </motion.span>
+        </div>
+      </div>
+
+      {/* Projects Badge */}
+      {exp.projects && exp.projects.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {exp.projects.map((project, idx) => (
+            <motion.span
+              key={idx}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 rounded-full text-sm font-medium text-primary hover:border-primary/40 transition-all duration-300"
+            >
+              {project}
+            </motion.span>
+          ))}
+        </div>
+      )}
+
+      {/* Divider */}
+      <div className="relative h-px">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-border to-transparent" />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-0 group-hover:opacity-50 transition-opacity duration-500"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
+      </div>
+
+      {/* Responsibilities */}
+      <ul className="space-y-3 md:space-y-4">
+        {exp.responsibilities.map((resp, idx) => (
+          <motion.li
+            key={idx}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: idx * 0.08, duration: 0.5 }}
+            viewport={{ once: true }}
+            whileHover={{ x: 8 }}
+            className="flex items-start gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+          >
+            <motion.span
+              className="flex-shrink-0 w-2 h-2 bg-gradient-to-br from-primary via-purple-500 to-pink-500 rounded-full mt-2"
+              whileHover={{ scale: 1.5, rotate: 180 }}
+              transition={{ duration: 0.3 }}
+            />
+            <span className="leading-relaxed text-sm md:text-base">{resp}</span>
+          </motion.li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
 
                     {/* Hover Glow Effect */}
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/0 via-purple-500/0 to-pink-500/0 group-hover:from-primary/5 group-hover:via-purple-500/5 group-hover:to-pink-500/5 transition-all duration-500 pointer-events-none" />

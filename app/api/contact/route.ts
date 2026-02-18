@@ -22,23 +22,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email using Web3Forms - using FormData format as required
-    const formData = new FormData();
-    formData.append("access_key", process.env.WEB3FORMS_ACCESS_KEY || "");
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("message", message);
-    formData.append("subject", `Portfolio Contact থেকে নতুন message - ${name}`);
-    formData.append("from_name", "Portfolio Contact Form");
-    
+    // Send email using Web3Forms API with JSON
+    const web3formsPayload = {
+      access_key: "01c9c44e-f4c8-4183-9e17-8e521f1e5adc",
+      name: name,
+      email: email,
+      message: message,
+      subject: `Portfolio Contact থেকে নতুন message - ${name}`,
+      from_name: "Portfolio Contact Form",
+    };
+
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(web3formsPayload),
     });
 
     const data = await response.json();
 
-    if (data.success) {
+    if (response.ok && data.success) {
       return NextResponse.json(
         { message: "Email sent successfully" },
         { status: 200 }
@@ -47,7 +52,7 @@ export async function POST(request: NextRequest) {
       console.error("Web3Forms Error:", data);
       return NextResponse.json(
         { error: data.message || "Failed to send email" },
-        { status: 400 }
+        { status: 500 }
       );
     }
   } catch (error) {

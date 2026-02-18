@@ -59,7 +59,7 @@ export default function Skills() {
     <section 
       ref={sectionRef}
       id="skills" 
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-10 md:py-32 overflow-hidden"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/40 to-background -z-10" />
@@ -117,15 +117,15 @@ export default function Skills() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 border border-primary/20 rounded-full backdrop-blur-sm"
+            className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-blue-400 via-purple-500/10 to-pink-500/10 border border-blue-400/20 rounded-full backdrop-blur-sm"
           >
             <Zap className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-800 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Tech Stack & Expertise
             </span>
           </motion.div>
           
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500  bg-clip-text text-transparent">
               Technical Skills
             </span>
@@ -276,7 +276,7 @@ export default function Skills() {
           <div className="relative bg-gradient-to-r from-card/80 via-card/90 to-card/80 backdrop-blur-xl border border-primary/20 rounded-2xl p-8 overflow-hidden">
             {/* Background Animation */}
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-primary/5 via-purple-500/5 to-pink-500/5"
+              className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500/5 to-pink-500/5"
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}

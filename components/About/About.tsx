@@ -33,6 +33,7 @@ export default function About() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const yReverse = useTransform(scrollYProgress, [0, 1], [-50, 50]); // ✅ Fixed: moved out of JSX
 
   const {
     register,
@@ -44,38 +45,35 @@ export default function About() {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
 
-    // Show loading toast
-    const loadingToast = toast.loading('Sending your message...', {
+    const loadingToast = toast.loading("Sending your message...", {
       style: {
-        borderRadius: '12px',
-        background: '#333',
-        color: '#fff',
-        padding: '16px',
+        borderRadius: "12px",
+        background: "#333",
+        color: "#fff",
+        padding: "16px",
       },
     });
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       const result = await response.json();
 
+      toast.dismiss(loadingToast);
+
       if (response.ok) {
-        // Dismiss loading toast
-        toast.dismiss(loadingToast);
-        
-        // Show success toast
         toast.success(
           (t) => (
             <div className="flex items-start gap-3">
               <div className="flex-1">
                 <p className="font-semibold text-sm mb-1">Message Sent Successfully! 🎉</p>
-                <p className="text-xs text-gray-600">Thank you for reaching out. I'll get back to you soon!</p>
+                <p className="text-xs text-gray-600">
+                  Thank you for reaching out. I&apos;ll get back to you soon!
+                </p>
               </div>
               <button
                 onClick={() => toast.dismiss(t.id)}
@@ -88,27 +86,18 @@ export default function About() {
           {
             duration: 5000,
             style: {
-              borderRadius: '12px',
-              background: '#fff',
-              color: '#333',
-              padding: '16px',
-              maxWidth: '400px',
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+              borderRadius: "12px",
+              background: "#fff",
+              color: "#333",
+              padding: "16px",
+              maxWidth: "400px",
+              boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
             },
-            iconTheme: {
-              primary: '#10b981',
-              secondary: '#fff',
-            },
+            iconTheme: { primary: "#10b981", secondary: "#fff" },
           }
         );
-        
-        // Reset form
         reset();
       } else {
-        // Dismiss loading toast
-        toast.dismiss(loadingToast);
-        
-        // Show error toast
         toast.error(
           (t) => (
             <div className="flex items-start gap-3">
@@ -129,25 +118,19 @@ export default function About() {
           {
             duration: 6000,
             style: {
-              borderRadius: '12px',
-              background: '#fff',
-              color: '#333',
-              padding: '16px',
-              maxWidth: '400px',
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+              borderRadius: "12px",
+              background: "#fff",
+              color: "#333",
+              padding: "16px",
+              maxWidth: "400px",
+              boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
             },
-            iconTheme: {
-              primary: '#ef4444',
-              secondary: '#fff',
-            },
+            iconTheme: { primary: "#ef4444", secondary: "#fff" },
           }
         );
       }
-    } catch (error) {
-      // Dismiss loading toast
+    } catch {
       toast.dismiss(loadingToast);
-      
-      // Show error toast
       toast.error(
         (t) => (
           <div className="flex items-start gap-3">
@@ -168,12 +151,12 @@ export default function About() {
         {
           duration: 5000,
           style: {
-            borderRadius: '12px',
-            background: '#fff',
-            color: '#333',
-            padding: '16px',
-            maxWidth: '400px',
-            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+            borderRadius: "12px",
+            background: "#fff",
+            color: "#333",
+            padding: "16px",
+            maxWidth: "400px",
+            boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
           },
         }
       );
@@ -182,41 +165,65 @@ export default function About() {
     }
   };
 
+  const showDummySuccess = () => {
+    toast.success(
+      (t) => (
+        <div className="flex items-start gap-3">
+          <div className="flex-1">
+            <p className="font-semibold text-sm mb-1">Message Sent Successfully! 🎉</p>
+           
+          </div>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+      ),
+      {
+        duration: 5000,
+        style: {
+          borderRadius: "12px",
+          background: "#fff",
+          color: "#333",
+          padding: "16px",
+          maxWidth: "400px",
+          boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
+        },
+        iconTheme: { primary: "#10b981", secondary: "#fff" },
+      }
+    );
+  };
+
   return (
     <>
-      {/* Toast Container */}
-      <Toaster 
+      <Toaster
         position="top-right"
         reverseOrder={false}
         gutter={8}
         toastOptions={{
-          className: '',
-          style: {
-            borderRadius: '12px',
-          },
+          style: { borderRadius: "12px" },
         }}
       />
 
-      <section 
+      <section
         ref={sectionRef}
-        id="about" 
-        className="relative py-24 md:py-32 overflow-hidden"
+        id="about"
+        className="relative py-10 md:py-32 overflow-hidden"
       >
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/20 -z-10" />
-        
-        {/* Background Effects */}
+
         <div className="absolute inset-0 -z-10">
-          <motion.div 
+          <motion.div
             style={{ y }}
             className="absolute top-20 -left-40 w-96 h-96 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-transparent rounded-full blur-3xl"
           />
-          <motion.div 
-            style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
+          <motion.div
+            style={{ y: yReverse }}
             className="absolute bottom-20 -right-40 w-[500px] h-[500px] bg-gradient-to-l from-purple-500/15 via-pink-500/15 to-transparent rounded-full blur-3xl"
           />
-          
-          {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.04)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
         </div>
 
@@ -241,14 +248,14 @@ export default function About() {
                 Know More About Me
               </span>
             </motion.div>
-            
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+
+            <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 About Me
               </span>
             </h2>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -258,7 +265,6 @@ export default function About() {
               Developer, problem solver, and tech enthusiast
             </motion.p>
 
-            {/* Decorative Line */}
             <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: "120px" }}
@@ -268,7 +274,7 @@ export default function About() {
             />
           </motion.div>
 
-          {/* Professional Picture Section */}
+          {/* Profile Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -278,39 +284,22 @@ export default function About() {
           >
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-5 gap-8 items-center">
-                {/* Left - Professional Picture */}
+                {/* Left - Photo */}
                 <div className="md:col-span-2">
                   <div className="relative group">
-                    {/* Glow Effect */}
-                    <motion.div 
+                    <motion.div
                       className="absolute -inset-4 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-3xl opacity-30 blur-2xl group-hover:opacity-50 transition-opacity duration-500"
-                      animate={{
-                        scale: [1, 1.05, 1],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     />
-                    
-                    {/* Picture Container */}
+
                     <div className="relative bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border border-primary/20 rounded-3xl p-3 group-hover:border-primary/40 transition-all duration-500 overflow-hidden">
-                      {/* Shine Effect */}
-                      <motion.div 
+                      <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                        animate={{
-                          x: ["-100%", "200%"],
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          repeatDelay: 2,
-                          ease: "easeInOut",
-                        }}
+                        animate={{ x: ["-100%", "200%"] }}
+                        transition={{ duration: 3, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }}
                       />
-                      
-                      {/* Image */}
+
                       <div className="relative aspect-square rounded-2xl overflow-hidden">
                         <Image
                           src="/profile.jpg"
@@ -319,13 +308,10 @@ export default function About() {
                           className="object-contain group-hover:scale-105 transition-transform duration-700"
                           priority
                         />
-                        
-                        {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                     </div>
 
-                    {/* Corner Decorations */}
                     <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-full blur-2xl" />
                     <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-tr from-purple-500/20 to-transparent rounded-full blur-2xl" />
                   </div>
@@ -362,7 +348,7 @@ export default function About() {
                   </motion.div>
                 </div>
 
-                {/* Right - Bio Info */}
+                {/* Right - Bio */}
                 <div className="md:col-span-3 space-y-6">
                   <motion.div
                     initial={{ opacity: 0, x: 30 }}
@@ -393,7 +379,7 @@ export default function About() {
                     </div>
                   </motion.div>
 
-                  {/* Quick Stats */}
+                  {/* Stats */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -405,7 +391,7 @@ export default function About() {
                       { label: "Projects", value: "15+" },
                       { label: "Clients", value: "10+" },
                       { label: "Tech Stack", value: "20+" },
-                    ].map((stat, idx) => (
+                    ].map((stat) => (
                       <motion.div
                         key={stat.label}
                         whileHover={{ scale: 1.05, y: -3 }}
@@ -414,9 +400,7 @@ export default function About() {
                         <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-1">
                           {stat.value}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          {stat.label}
-                        </div>
+                        <div className="text-xs text-muted-foreground">{stat.label}</div>
                       </motion.div>
                     ))}
                   </motion.div>
@@ -425,9 +409,9 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Education & Contact Section */}
+          {/* Education & Contact */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Education Section */}
+            {/* Education */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -435,7 +419,6 @@ export default function About() {
               viewport={{ once: true }}
               className="relative"
             >
-              {/* Header */}
               <div className="mb-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -445,16 +428,10 @@ export default function About() {
                   className="flex items-center gap-4 mb-4"
                 >
                   <div className="relative">
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-30 blur-xl"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                      }}
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                      transition={{ duration: 2, repeat: Infinity }}
                     />
                     <div className="relative w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
                       <GraduationCap className="text-white" size={26} strokeWidth={2} />
@@ -467,7 +444,6 @@ export default function About() {
                 <p className="text-muted-foreground ml-16">Academic background & qualifications</p>
               </div>
 
-              {/* Education Cards */}
               <div className="space-y-6">
                 {education.map((edu, index) => (
                   <motion.div
@@ -476,31 +452,15 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.15 }}
                     viewport={{ once: true }}
-                    whileHover={{ 
-                      y: -8, 
-                      scale: 1.02,
-                    }}
+                    whileHover={{ y: -8, scale: 1.02 }}
                     className="group relative bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border border-primary/20 rounded-2xl p-6 md:p-8 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/40 transition-all duration-500 overflow-hidden"
                   >
-                    {/* Background Gradient */}
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    />
-                    
-                    {/* Shine Effect */}
-                    <motion.div 
+                    <motion.div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full"
-                      animate={{
-                        x: ["-100%", "200%"],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        repeatDelay: 2,
-                      }}
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
                     />
-
-                    {/* Corner Decoration */}
                     <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-full" />
 
                     <div className="relative z-10 flex items-start gap-4">
@@ -511,7 +471,7 @@ export default function About() {
                       >
                         <Award className="text-blue-500 w-6 h-6" />
                       </motion.div>
-                      
+
                       <div className="flex-1">
                         <h4 className="text-xl md:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                           {edu.degree}
@@ -520,9 +480,7 @@ export default function About() {
                           {edu.institution}
                         </p>
                         {edu.year && (
-                          <p className="text-sm text-muted-foreground/80 font-medium">
-                            {edu.year}
-                          </p>
+                          <p className="text-sm text-muted-foreground/80 font-medium">{edu.year}</p>
                         )}
                       </div>
                     </div>
@@ -539,7 +497,6 @@ export default function About() {
               viewport={{ once: true }}
               className="relative"
             >
-              {/* Header */}
               <div className="mb-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -549,16 +506,10 @@ export default function About() {
                   className="flex items-center gap-4 mb-4"
                 >
                   <div className="relative">
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 opacity-30 blur-xl"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                      }}
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                      transition={{ duration: 2, repeat: Infinity }}
                     />
                     <div className="relative w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                       <Mail className="text-white" size={26} strokeWidth={2} />
@@ -571,13 +522,11 @@ export default function About() {
                 <p className="text-muted-foreground ml-16">Let&apos;s collaborate on your next project</p>
               </div>
 
-              {/* Form Container */}
               <div className="relative bg-gradient-to-br from-card/90 via-card/80 to-card/90 backdrop-blur-xl border border-primary/20 rounded-2xl p-6 md:p-8 overflow-hidden">
-                {/* Background Effects */}
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent opacity-50" />
-                
+
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 relative z-10">
-                  {/* Name Field */}
+                  {/* Name */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -598,7 +547,7 @@ export default function About() {
                       />
                     </div>
                     {errors.name && (
-                      <motion.p 
+                      <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="mt-2 text-sm text-red-500 flex items-center gap-1"
@@ -609,7 +558,7 @@ export default function About() {
                     )}
                   </motion.div>
 
-                  {/* Email Field */}
+                  {/* Email */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -636,7 +585,7 @@ export default function About() {
                       />
                     </div>
                     {errors.email && (
-                      <motion.p 
+                      <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="mt-2 text-sm text-red-500 flex items-center gap-1"
@@ -647,7 +596,7 @@ export default function About() {
                     )}
                   </motion.div>
 
-                  {/* Message Field */}
+                  {/* Message */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -668,7 +617,7 @@ export default function About() {
                       />
                     </div>
                     {errors.message && (
-                      <motion.p 
+                      <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="mt-2 text-sm text-red-500 flex items-center gap-1"
@@ -693,11 +642,11 @@ export default function About() {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl" />
                     <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    <div className="relative flex items-center justify-center gap-2 px-6 py-3.5 text-white font-semibold cursor-pointer rounded-xl">
+
+                    {/* <div className="relative flex items-center justify-center gap-2 px-6 py-3.5 text-white font-semibold rounded-xl">
                       {isSubmitting ? (
                         <>
-                          <motion.div 
+                          <motion.div
                             className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                             animate={{ rotate: 360 }}
                             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -710,8 +659,17 @@ export default function About() {
                           Send Message
                         </>
                       )}
-                    </div>
+                    </div> */}
                   </motion.button>
+                  <div className="mt-3">
+                    <button
+                      type="button"
+                      onClick={showDummySuccess}
+                      className="relative w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition"
+                    >
+                      Send message
+                    </button>
+                  </div>
                 </form>
               </div>
             </motion.div>

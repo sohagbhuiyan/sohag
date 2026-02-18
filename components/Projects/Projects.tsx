@@ -51,7 +51,7 @@ const floatingAnimation: any = {
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background">
+    <section id="projects" className="relative py-10 md:py-32 overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background">
       {/* Animated Background - Similar to Experience Section */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Orbs with Motion */}
@@ -118,7 +118,7 @@ export default function Projects() {
         >
           <motion.div
             animate={floatingAnimation}
-            className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 border border-primary/20 rounded-full backdrop-blur-sm"
+            className="inline-flex items-center gap-2 mb-6 px-6 py-3 bg-gradient-to-r from-blue-300 via-purple-500/10 to-pink-500/10 border border-primary/20 rounded-full backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -126,7 +126,7 @@ export default function Projects() {
             </span>
           </motion.div>
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Featured Projects
             </span>
@@ -148,7 +148,7 @@ export default function Projects() {
             whileInView={{ width: "120px" }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full mx-auto mt-8"
+            className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mx-auto mt-8"
           />
         </motion.div>
 
@@ -178,7 +178,7 @@ export default function Projects() {
             >
               {/* Animated Background Gradient */}
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                className="absolute inset-0 bg-gradient-to-br from-blue-700 via-purple-500/5 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 animate={{
                   background: [
                     "linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 50%, rgba(236, 72, 153, 0.1) 100%)",
@@ -208,8 +208,8 @@ export default function Projects() {
               />
 
               {/* Project Number Badge */}
-              <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 backdrop-blur-md border border-primary/30 rounded-full flex items-center justify-center z-20">
-                <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent font-bold text-sm">
+              <div className="absolute top-4 right-4 h-8 w-8 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 via-purple-500/20 to-pink-500/20 backdrop-blur-md border border-blue-500/30 rounded-full flex items-center justify-center z-20">
+                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent font-bold text-sm">
                   #{index + 1}
                 </span>
               </div>
@@ -219,7 +219,7 @@ export default function Projects() {
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-transparent rounded-tr-full opacity-50" />
 
               {/* Project Header */}
-              <div className="relative p-7 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 z-10">
+              <div className="relative p-4 md:p-7 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 z-10">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500" />
                 
                 <motion.div
@@ -384,12 +384,12 @@ export default function Projects() {
           </motion.div>
           
           <motion.a
-            href="https://github.com/yourusername"
+            href="https://github.com/sohagbhuiyan"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-300 via-purple-500 to-pink-500 text-primary-foreground rounded-full font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+            className="inline-flex text-sm items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-300 via-purple-500 to-pink-500 text-primary-foreground rounded-full font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
           >
             <Github size={20} />
             <span>View All Projects on GitHub</span>

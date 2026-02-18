@@ -49,7 +49,7 @@ export const projects: Project[] = [
   },
   {
   id: "proj-2",
-  title: "Jotno  Mobile App (Expo)",
+  title: "Jotno Mobile App",
   description: "A modern cross-platform mobile task management application built with Expo, designed to manage personal and professional tasks efficiently on the go.",
   techStack: ["Expo", "React Native", "TypeScript"],
 features: [
@@ -65,7 +65,7 @@ features: [
 
   {
     id: "proj-3",
-    title: "Advanced To-Do Application",
+    title: "Advanced To-Do",
     description: "Task management application with personal and professional categorization",
     techStack: ["JavaScript", "HTML", "CSS"],
     github: "github.com/sohagbhuiyan/TODO",
